@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
-import { Plus, LogOut, FileText, CreditCard, Search, Filter, X } from 'lucide-react'
+import { Plus, LogOut, FileText, CreditCard } from 'lucide-react'
 import Link from 'next/link'
 import DashboardStats from '@/components/dashboard-stats'
 import { SupportBanner } from '@/components/support-banner'
@@ -29,18 +29,6 @@ export default function DashboardPage() {
   }
 
   const userInvoices = getInvoicesByUser(user.id)
-    .sort((a, b) => {
-      if (sortBy === 'date') {
-        return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime()
-      } else if (sortBy === 'amount') {
-        const totalA = a.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0)
-        const totalB = b.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0)
-        return totalB - totalA
-      } else if (sortBy === 'client') {
-        return a.client.name.localeCompare(b.client.name)
-      }
-      return 0
-    })
 
   const handleLogout = () => {
     logout()
@@ -100,7 +88,7 @@ export default function DashboardPage() {
           </Link>
           <Link href="/blog" className="group">
             <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
-              <Calculator className="w-3 h-3 sm:w-4 sm:h-4" />
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Blog</span>
               <span className="sm:hidden">Blog</span>
             </button>
@@ -121,58 +109,7 @@ export default function DashboardPage() {
 
         {/* Invoices List */}
         <div className="mt-6 sm:mt-8">
-          <p className="text-blue-300/70 text-sm">Twoje faktury będą wyświetlane tutaj...</p>
-        </div>
-
-            {/* Filters */}
-            <div className="flex flex-col gap-3 sm:gap-4">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Filter className="w-4 h-4 text-blue-300/70 flex-shrink-0" />
-                <span className="text-xs sm:text-sm text-blue-300/70">Status:</span>
-                <div className="flex gap-1 sm:gap-2 flex-wrap flex-1">
-                  {(['all', 'draft', 'sent', 'paid'] as const).map((status) => (
-                    <button
-                      key={status}
-                      onClick={() => setFilterStatus(status)}
-                      className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[36px] sm:min-h-[40px] flex items-center justify-center ${
-                        filterStatus === status
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-slate-700/50 text-blue-300/70 hover:bg-slate-700'
-                      }`}
-                    >
-                      {status === 'all' ? 'Wszystkie' : status === 'draft' ? 'Drafty' : status === 'sent' ? 'Wysłane' : 'Zapłacone'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs sm:text-sm text-blue-300/70">Sortuj:</span>
-                <div className="flex gap-1 sm:gap-2 flex-wrap flex-1">
-                  {(['date', 'amount', 'client'] as const).map((sort) => (
-                    <button
-                      key={sort}
-                      onClick={() => setSortBy(sort)}
-                      className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[36px] sm:min-h-[40px] flex items-center justify-center ${
-                        sortBy === sort
-                          ? 'bg-cyan-600 text-white'
-                          : 'bg-slate-700/50 text-blue-300/70 hover:bg-slate-700'
-                      }`}
-                    >
-                      {sort === 'date' ? 'Dacie' : sort === 'amount' ? 'Kwocie' : 'Kliencie'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Results Count */}
-            <p className="text-xs sm:text-sm text-blue-300/70">
-              Znaleziono {filteredInvoices.length} faktur{filteredInvoices.length === 1 ? 'ę' : filteredInvoices.length % 10 === 2 || filteredInvoices.length % 10 === 3 || filteredInvoices.length % 10 === 4 ? 'y' : ''}
-            </p>
-          </div>
-
-          <InvoicesList invoices={filteredInvoices} />
+          <p className="text-blue-300/70 text-sm">Masz {userInvoices.length} faktur{userInvoices.length === 1 ? 'ę' : ''}. Faktury zostaną wkrótce wyświetlone tutaj.</p>
         </div>
       </main>
     </div>
