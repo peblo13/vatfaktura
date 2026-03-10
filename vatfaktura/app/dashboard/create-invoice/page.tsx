@@ -35,7 +35,7 @@ export default function CreateInvoicePage() {
   })
 
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: '1', description: '', quantity: 1, unitPrice: 0, vat: 23 }
+    { id: '1', name: '', description: '', quantity: 1, unitPrice: 0, vat: 23, taxPercent: 23 }
   ])
   const [autofillingNip, setAutofillingNip] = useState(false)
 
@@ -56,13 +56,16 @@ export default function CreateInvoicePage() {
   const addItem = () => {
     const newItem: InvoiceItem = {
       id: Math.random().toString(36).substr(2, 9),
+      name: '',
       description: '',
       quantity: 1,
       unitPrice: 0,
       vat: 23,
+      taxPercent: 23,
     }
     setItems([...items, newItem])
   }
+
 
   const removeItem = (id: string) => {
     setItems(items.filter(item => item.id !== id))
@@ -295,11 +298,21 @@ export default function CreateInvoicePage() {
             <div className="space-y-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4 items-end bg-slate-900/30 p-4 rounded-lg border border-blue-500/10">
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
+                    <label className="block text-xs font-medium text-blue-300 mb-1">Nazwa</label>
+                    <Input
+                      type="text"
+                      placeholder="Nazwa produktu lub usługi"
+                      value={item.name}
+                      onChange={(e) => updateItem(item.id, 'name', e.target.value)}
+                      className="min-h-[40px]"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
                     <label className="block text-xs font-medium text-blue-300 mb-1">Opis</label>
                     <Input
                       type="text"
-                      placeholder="Opis usługi lub produktu"
+                      placeholder="Opis usługi lub produktu (opcjonalnie)"
                       value={item.description}
                       onChange={(e) => updateItem(item.id, 'description', e.target.value)}
                       className="min-h-[40px]"
@@ -331,7 +344,11 @@ export default function CreateInvoicePage() {
                     <label className="block text-xs font-medium text-blue-300 mb-1">VAT %</label>
                     <select
                       value={item.vat}
-                      onChange={(e) => updateItem(item.id, 'vat', parseFloat(e.target.value))}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value)
+                        updateItem(item.id, 'vat', val)
+                        updateItem(item.id, 'taxPercent', val)
+                      }}
                       className="w-full min-h-[40px] bg-slate-800 border border-blue-500/30 rounded-lg text-blue-300 text-sm"
                     >
                       <option value="0">0%</option>

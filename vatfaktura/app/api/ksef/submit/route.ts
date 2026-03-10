@@ -65,9 +65,17 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as SubmitInvoiceRequest
     const { userId, invoiceId, invoiceData } = body
 
+    console.log('[v0] kSEF submit request received:', {
+      userId,
+      invoiceId,
+      invoiceNumber: invoiceData.number,
+      itemsCount: invoiceData.items.length,
+    })
+
     // 1. Walidacja użytkownika
     const user = getUserById(userId)
     if (!user) {
+      console.error('[v0] User not found:', userId)
       return NextResponse.json(
         createErrorResponse('AUTH_FAILED', 401, 'Użytkownik nie znaleziony'),
         { status: 401 }
@@ -76,12 +84,14 @@ export async function POST(request: NextRequest) {
 
     const userNIP = user.nip || ''
     if (!validateNIP(userNIP)) {
+      console.error('[v0] Invalid NIP:', userNIP)
       return NextResponse.json(
         createErrorResponse('INVALID_NIP', 400, 'NIP użytkownika jest nieprawidłowy'),
         { status: 400 }
       )
     }
 
+    console.log('[v0] User validation passed:', { company: user.company, nip: userNIP })
     logKsefSuccess('SUBMIT_START', `Wysyłanie faktury ${invoiceData.number}`, userId, userNIP)
 
     // 2. Sprawdzenie czy faktura już nie została wysłana

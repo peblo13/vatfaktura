@@ -112,83 +112,124 @@ export default function InvoicesList({ invoices }: InvoicesListProps) {
         </Card>
       ) : (
         <>
-          {/* Invoices Table */}
-          <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-blue-500/20 bg-slate-900/50">
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-blue-300">Numer</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-blue-300">Klient</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-blue-300">Data wystawienia</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-blue-300">Status</th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-blue-300">Akcje</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedInvoices.map((invoice, index) => (
-                    <tr key={invoice.id} className={`border-b border-blue-500/10 hover:bg-blue-500/5 transition-colors ${index % 2 === 0 ? 'bg-slate-800/30' : 'bg-slate-800/20'}`}>
-                      <td className="px-6 py-4 text-sm font-medium text-white">{invoice.number}</td>
-                      <td className="px-6 py-4 text-sm text-blue-200/80">{invoice.client.name}</td>
-                      <td className="px-6 py-4 text-sm text-blue-200/80">
-                        {new Date(invoice.issueDate).toLocaleDateString('pl-PL')}
-                      </td>
-                      <td className="px-6 py-4 text-sm">
-                        {shouldShowStatus(invoice.status) && (
-                          <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(invoice.status)}`}>
-                            {getStatusLabel(invoice.status)}
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-3">
-                          <Link href={`/dashboard/invoices/${invoice.id}`}>
-                            <button className="px-4 py-2 flex items-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-300 hover:text-blue-200 transition-all border border-blue-500/30 hover:border-blue-500/50 text-sm font-medium min-h-[36px]">
-                              <Eye className="w-4 h-4" />
-                              Podgląd
-                            </button>
-                          </Link>
-                          <button
-                            onClick={() => window.print()}
-                            className="px-4 py-2 flex items-center gap-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg text-cyan-300 hover:text-cyan-200 transition-all border border-cyan-500/30 hover:border-cyan-500/50 text-sm font-medium min-h-[36px]"
-                          >
-                            <Download className="w-4 h-4" />
-                            Pobierz
-                          </button>
-                          <DeleteInvoiceButton invoiceId={invoice.id} invoiceNumber={invoice.number} />
-                        </div>
-                      </td>
+          {/* Invoices Table - Desktop */}
+          <div className="hidden sm:block">
+            <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-blue-500/20 bg-slate-900/50">
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-blue-300">Numer</th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-blue-300">Klient</th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-blue-300">Data</th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-blue-300">Status</th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-right text-xs font-semibold text-blue-300">Akcje</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+                  </thead>
+                  <tbody>
+                    {paginatedInvoices.map((invoice, index) => (
+                      <tr key={invoice.id} className={`border-b border-blue-500/10 hover:bg-blue-500/5 transition-colors ${index % 2 === 0 ? 'bg-slate-800/30' : 'bg-slate-800/20'}`}>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium text-white">{invoice.number}</td>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-blue-200/80">{invoice.client.name}</td>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-blue-200/80">
+                          {new Date(invoice.issueDate).toLocaleDateString('pl-PL')}
+                        </td>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm">
+                          {shouldShowStatus(invoice.status) && (
+                            <span className={`inline-block px-2 sm:px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(invoice.status)}`}>
+                              {getStatusLabel(invoice.status)}
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-4 sm:px-6 py-3 sm:py-4 text-right">
+                          <div className="flex items-center justify-end gap-1 sm:gap-3">
+                            <Link href={`/dashboard/invoices/${invoice.id}`}>
+                              <button className="px-2 sm:px-4 py-2 flex items-center gap-1 sm:gap-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-300 hover:text-blue-200 transition-all border border-blue-500/30 hover:border-blue-500/50 text-xs sm:text-sm font-medium min-h-[36px]">
+                                <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                                <span className="hidden sm:inline">Podgląd</span>
+                              </button>
+                            </Link>
+                            <button
+                              onClick={() => window.print()}
+                              className="px-2 sm:px-4 py-2 flex items-center gap-1 sm:gap-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg text-cyan-300 hover:text-cyan-200 transition-all border border-cyan-500/30 hover:border-cyan-500/50 text-xs sm:text-sm font-medium min-h-[36px]"
+                            >
+                              <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+                              <span className="hidden sm:inline">Pobierz</span>
+                            </button>
+                            <DeleteInvoiceButton invoiceId={invoice.id} invoiceNumber={invoice.number} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          </div>
+
+          {/* Invoices Cards - Mobile */}
+          <div className="sm:hidden space-y-3">
+            {paginatedInvoices.map((invoice) => (
+              <Card key={invoice.id} className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg p-4">
+                <div className="space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-white text-sm truncate">{invoice.number}</p>
+                      <p className="text-xs text-blue-200/70 truncate">{invoice.client.name}</p>
+                    </div>
+                    {shouldShowStatus(invoice.status) && (
+                      <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium border whitespace-nowrap flex-shrink-0 ${getStatusColor(invoice.status)}`}>
+                        {getStatusLabel(invoice.status)}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-blue-300/60">
+                    {new Date(invoice.issueDate).toLocaleDateString('pl-PL')}
+                  </p>
+                  <div className="flex items-center gap-2 pt-2">
+                    <Link href={`/dashboard/invoices/${invoice.id}`} className="flex-1">
+                      <button className="w-full px-3 py-2 flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-300 hover:text-blue-200 transition-all border border-blue-500/30 hover:border-blue-500/50 text-xs font-medium min-h-[36px]">
+                        <Eye className="w-3 h-3" />
+                        Podgląd
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => window.print()}
+                      className="px-3 py-2 flex items-center justify-center gap-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg text-cyan-300 hover:text-cyan-200 transition-all border border-cyan-500/30 hover:border-cyan-500/50 text-xs font-medium min-h-[36px]"
+                    >
+                      <Download className="w-3 h-3" />
+                    </button>
+                    <DeleteInvoiceButton invoiceId={invoice.id} invoiceNumber={invoice.number} />
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg p-4 flex items-center justify-between">
-              <p className="text-sm text-blue-200/70">
+            <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-xs sm:text-sm text-blue-200/70 text-center sm:text-left">
                 Strona {currentPage} z {totalPages} • {filteredInvoices.length} faktur
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-2 w-full sm:w-auto">
                 <Button
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
-                  className="flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                   variant="outline"
                 >
-                  <ChevronLeft className="w-4 h-4" />
-                  Poprzednia
+                  <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden xs:inline">Poprzednia</span>
                 </Button>
                 <Button
                   onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
-                  className="flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                   variant="outline"
                 >
-                  Następna
-                  <ChevronRight className="w-4 h-4" />
+                  <span className="hidden xs:inline">Następna</span>
+                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
               </div>
             </Card>

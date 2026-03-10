@@ -16,67 +16,67 @@ export default function PricingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 sm:py-12 px-3 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-block mb-4 px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full">
-            <span className="text-sm font-semibold text-green-300">100% BEZPŁATNIE ZAWSZE</span>
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-block mb-4 px-3 sm:px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full">
+            <span className="text-xs sm:text-sm font-semibold text-green-300">100% BEZPŁATNIE ZAWSZE</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
             Wszystkie plany za darmo
           </h1>
-          <p className="text-xl text-slate-300">
+          <p className="text-sm sm:text-base md:text-lg text-slate-300 px-4">
             Brak karty kredytowej, brak ukrytych opłat, brak limitów. Wszystkie funkcje dostępne dla każdego.
           </p>
         </div>
 
         {/* Trust Signals */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">∞</div>
-            <p className="text-slate-300">Nieograniczone faktury</p>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">∞</div>
+            <p className="text-xs sm:text-sm md:text-base text-slate-300">Nieograniczone faktury</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">💳</div>
-            <p className="text-slate-300">Nigdy nie będzie karty kredytowej</p>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">💳</div>
+            <p className="text-xs sm:text-sm md:text-base text-slate-300">Nigdy nie będzie karty kredytowej</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">🔓</div>
-            <p className="text-slate-300">Pełny dostęp do wszystkich funkcji</p>
+            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">🔓</div>
+            <p className="text-xs sm:text-sm md:text-base text-slate-300">Pełny dostęp do wszystkich funkcji</p>
           </div>
         </div>
 
         {/* Pricing Cards - All the Same */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {plans.map((plan) => (
             <div
               key={plan.id}
               className="relative rounded-lg transition-all duration-300 bg-slate-800 border border-blue-500/30 hover:border-blue-500/50 shadow-lg"
             >
-              <div className="p-8">
+              <div className="p-4 sm:p-6 md:p-8">
                 {/* Plan Name */}
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">{plan.name}</h3>
 
                 {/* Price - Always Free */}
-                <div className="mb-6">
-                  <span className="text-5xl font-bold text-green-400">0 PLN</span>
-                  <span className="text-slate-400 ml-2">zawsze</span>
+                <div className="mb-4 sm:mb-6">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-400">0 PLN</span>
+                  <span className="text-slate-400 ml-2 text-xs sm:text-sm">zawsze</span>
                 </div>
 
                 {/* CTA Button */}
-                <Link href={user ? '/dashboard' : '/register'} className="block w-full mb-8">
-                  <Button className="w-full h-11 font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
+                <Link href={user ? '/dashboard' : '/register'} className="block w-full mb-4 sm:mb-8">
+                  <Button className="w-full min-h-[44px] text-xs sm:text-sm md:text-base font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
                     {user ? 'Przejdź do dashboardu' : 'Załóż konto'}
                   </Button>
                 </Link>
 
                 {/* Features */}
-                <ul className="space-y-4">
+                <ul className="space-y-3 sm:space-y-4">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-300 text-sm">{feature}</span>
+                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-slate-300 text-xs sm:text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -86,13 +86,13 @@ export default function PricingPage() {
         </div>
 
         {/* FAQ / Info Section */}
-        <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-6">Pytania i odpowiedzi</h2>
+        <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 sm:p-6 md:p-8 max-w-3xl mx-auto">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6">Pytania i odpowiedzi</h2>
           
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Czy zawsze będzie to bezpłatne?</h3>
-              <p className="text-slate-300">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Czy zawsze będzie to bezpłatne?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
                 Tak! VAT Faktura jest całkowicie bezpłatny. Naszą misją jest dostarczenie najlepszych narzędzi fakturowania dla każdego.
               </p>
             </div>
@@ -112,9 +112,16 @@ export default function PricingPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Jaka jest różnica między planami?</h3>
-              <p className="text-slate-300">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Jaka jest różnica między planami?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
                 Nie ma różnicy. Wszystkie plany zawierają identyczne funkcje. Wybierz ten, który ci się podoba!
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Jak portal się finansuje?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Zarabiamy prowizje z linków partnerskich (Wise, Stripe, Google Workspace). Dzięki tobie że wspierasz nasz projekt! <Link href="/#partners" className="text-cyan-400 hover:text-cyan-300 transition">Poznaj naszych partnerów →</Link>
               </p>
             </div>
           </div>

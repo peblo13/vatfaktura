@@ -144,3 +144,93 @@
     scroll-behavior: smooth;
   }
 }
+
+@layer components {
+  /* Mobile-first typography - xs breakpoint (320px) */
+  @media (max-width: 374px) {
+    body {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+    }
+    
+    h3 {
+      font-size: 1.1rem;
+    }
+    
+    p {
+      font-size: 0.875rem;
+    }
+  }
+  
+  /* iPhone SE - 375px */
+  @media (min-width: 375px) and (max-width: 640px) {
+    /* Ensure all interactive elements are at least 44x44px */
+    button, input, select, textarea, a[role="button"] {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
+    
+    /* Optimize tap targets */
+    [role="button"], button, input[type="button"], input[type="reset"], input[type="submit"] {
+      padding: 0.625rem;
+    }
+  }
+  
+  /* Small improvements for better padding on mobile */
+  @media (max-width: 640px) {
+    /* Reduce padding on small screens */
+    .px-4 {
+      @apply px-3;
+    }
+    
+    .py-4 {
+      @apply py-3;
+    }
+    
+    .p-4 {
+      @apply p-3;
+    }
+    
+    /* Better spacing for mobile forms */
+    input, textarea, select {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Touch-friendly spacing */
+    .gap-4 {
+      @apply gap-3;
+    }
+    
+    /* Reduce animation on mobile for better performance */
+    .animate-blob {
+      animation-duration: 8s;
+    }
+  }
+  
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* iPhone notch support */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(1rem, env(safe-area-inset-top));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
+}

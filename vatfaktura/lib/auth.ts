@@ -17,6 +17,9 @@ export interface User {
   email: string
   company: string
   nip: string
+  address?: string
+  city?: string
+  postalCode?: string
   subscription?: UserSubscription
 }
 
