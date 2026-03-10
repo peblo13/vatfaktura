@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AuthProvider } from './auth-context'
 import { InvoiceProvider } from './invoice-context'
-import { PitProvider } from './pit-context'
+import { PitProviderWrapper } from './pit-provider-wrapper'
 import { InitDemo } from './init-demo'
 import CookieConsent from './cookie-consent'
 import { CursorTrail } from '@/components/cursor-trail'
@@ -120,12 +120,12 @@ export default function RootLayout({
         <FuturisticLoader />
         <AuthProvider>
           <InvoiceProvider>
-            <PitProvider userId={''}>
+            <PitProviderWrapper>
               <InitDemo />
               {children}
               <CookieConsent />
               <Analytics />
-            </PitProvider>
+            </PitProviderWrapper>
           </InvoiceProvider>
         </AuthProvider>
       </body>
