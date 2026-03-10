@@ -43,6 +43,7 @@ interface PitContextType {
   addCalculatorEntry: (input: PitCalculatorInput, output: PitCalculatorOutput) => void
 
   // Utils
+  getTotalTaxLiability: () => number
   isLoading: boolean
 }
 
@@ -219,6 +220,11 @@ export function PitProvider({ children, userId }: { children: React.ReactNode; u
     }
   }
 
+  // Utils
+  const getTotalTaxLiability = (): number => {
+    return declarations.reduce((sum, declaration) => sum + (declaration.taxLiability || 0), 0)
+  }
+
   const value: PitContextType = {
     declarations,
     addDeclaration,
@@ -245,6 +251,7 @@ export function PitProvider({ children, userId }: { children: React.ReactNode; u
     calculatorHistory,
     addCalculatorEntry,
 
+    getTotalTaxLiability,
     isLoading,
   }
 

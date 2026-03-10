@@ -6,10 +6,11 @@ import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Plus, LogOut, FileText, CreditCard, Search, Filter, X } from 'lucide-react'
+import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator } from 'lucide-react'
 import Link from 'next/link'
 import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
+import PitDashboardWidget from '@/components/pit/pit-dashboard-widget'
 import { SupportBanner } from '@/components/support-banner'
 
 export default function DashboardPage() {
@@ -100,8 +101,11 @@ export default function DashboardPage() {
         {/* Stats */}
         <DashboardStats invoices={userInvoices} />
 
+        {/* PIT Widget */}
+        <PitDashboardWidget />
+
         {/* Action Buttons */}
-        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
           <Link href="/dashboard/create-invoice" className="group">
             <Button className="w-full min-h-[44px] text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/75 transition-all">
               <Plus className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -114,6 +118,13 @@ export default function DashboardPage() {
               <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Szablony</span>
               <span className="sm:hidden">Sza</span>
+            </Button>
+          </Link>
+          <Link href="/dashboard/pit" className="group">
+            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all">
+              <Calculator className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Rozliczenia</span>
+              <span className="sm:hidden">PIT</span>
             </Button>
           </Link>
           <Link href="/dashboard/billing" className="group">
