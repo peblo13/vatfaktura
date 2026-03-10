@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist } from 'next/font/google'
 
 const geistSans = Geist({ subsets: ['latin'] })
-const geistMono = Geist_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'VAT Faktura',
@@ -24,20 +23,22 @@ export default function RootLayout({
     <html lang="pl">
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>{`
           * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
           }
-          html, body {
+          html, body, #__next {
             width: 100%;
             height: 100%;
           }
           body {
             background-color: #0f172a;
             color: #ffffff;
-            font-family: ${geistSans.style.fontFamily};
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 16px;
           }
         `}</style>
       </head>
