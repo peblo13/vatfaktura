@@ -36,15 +36,17 @@ export default function LoginPage() {
       }
 
       if (data.token) {
-        localStorage.setItem('authToken', data.token)
-        localStorage.setItem('user', JSON.stringify({
+        localStorage.setItem('vatfaktura_user', JSON.stringify({
           id: data.userId,
           email: data.email,
           company: data.company,
           nip: data.nip,
         }))
+        localStorage.setItem('vatfaktura_auth_token', data.token)
       }
 
+      // Force a small delay to ensure localStorage is written before redirect
+      await new Promise(resolve => setTimeout(resolve, 100))
       router.push('/dashboard')
     } catch (err) {
       setError('Błąd sieci - spróbuj ponownie')

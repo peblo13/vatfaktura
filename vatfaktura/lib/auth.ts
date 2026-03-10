@@ -25,25 +25,25 @@ export interface User {
 
 export function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null
-  return localStorage.getItem('authToken')
+  return localStorage.getItem('vatfaktura_auth_token')
 }
 
 export function getUser(): User | null {
   if (typeof window === 'undefined') return null
-  const user = localStorage.getItem('user')
+  const user = localStorage.getItem('vatfaktura_user')
   return user ? JSON.parse(user) : null
 }
 
 export function setAuth(token: string, user: User) {
   if (typeof window === 'undefined') return
-  localStorage.setItem('authToken', token)
-  localStorage.setItem('user', JSON.stringify(user))
+  localStorage.setItem('vatfaktura_auth_token', token)
+  localStorage.setItem('vatfaktura_user', JSON.stringify(user))
 }
 
 export function logout() {
   if (typeof window === 'undefined') return
-  localStorage.removeItem('authToken')
-  localStorage.removeItem('user')
+  localStorage.removeItem('vatfaktura_auth_token')
+  localStorage.removeItem('vatfaktura_user')
 }
 
 export function isAuthenticated(): boolean {
