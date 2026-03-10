@@ -154,7 +154,7 @@ export default function Home() {
         </div>
 
         {/* Features */}
-        <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32 relative">
+        <section id="features" className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32 relative">
           <div className="relative z-10">
             <div className="text-center mb-12 sm:mb-16 md:mb-20 space-y-4 sm:space-y-6">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-300 bg-clip-text text-transparent px-4">
@@ -382,7 +382,7 @@ export default function Home() {
                 },
                 {
                   name: 'Canva',
-                  description: 'Twórz materiały marketingowe',
+                  description: 'Tw��rz materiały marketingowe',
                   icon: '🎨',
                   color: 'from-indigo-600/20 to-purple-600/20',
                   borderColor: 'border-indigo-500/30 hover:border-indigo-500/60',
