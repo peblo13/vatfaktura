@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
 
 const geistSans = Geist({ subsets: ['latin'] })
 const geistMono = Geist_Mono({ subsets: ['latin'] })
@@ -25,8 +24,24 @@ export default function RootLayout({
     <html lang="pl">
       <head>
         <meta charSet="utf-8" />
+        <style>{`
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          html, body {
+            width: 100%;
+            height: 100%;
+          }
+          body {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: ${geistSans.style.fontFamily};
+          }
+        `}</style>
       </head>
-      <body className={`${geistSans.className} antialiased bg-slate-900 text-white`}>
+      <body>
         {children}
       </body>
     </html>
