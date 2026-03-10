@@ -526,7 +526,14 @@ export default function Home() {
 
             <div className="border-t border-white/10 pt-8 text-center text-sm text-blue-200/60">
               <p>&copy; 2026 VAT Faktura. Wszystkie prawa zastrzeżone.</p>
-              <p className="text-xs mt-2">
+              <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs">
+                <a href="/privacy" className="text-blue-300 hover:text-blue-100 transition">Polityka Prywatności</a>
+                <span className="text-blue-500/30">•</span>
+                <a href="/terms" className="text-blue-300 hover:text-blue-100 transition">Warunki Użytkowania</a>
+                <span className="text-blue-500/30">•</span>
+                <a href="/contact" className="text-blue-300 hover:text-blue-100 transition">Kontakt</a>
+              </div>
+              <p className="text-xs mt-4">
                 Zarabiamy prowizje z linków partnerskich. Dzięki za wsparcie naszego projektu.
               </p>
             </div>
