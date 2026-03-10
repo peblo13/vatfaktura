@@ -72,6 +72,13 @@ export default function AboutPage() {
             Twórca i Właściciel
           </h2>
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
+            <div className="flex-shrink-0">
+              <img 
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pawel-DbcM870Vu7RrImVXSklJyzlPh6PZy0.png"
+                alt="Paweł Śliwiński - twórca VAT Faktura"
+                className="w-40 h-40 sm:w-48 sm:h-48 rounded-xl object-cover border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20"
+              />
+            </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold text-cyan-300 mb-2">
                 Paweł Śliwiński
