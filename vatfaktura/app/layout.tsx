@@ -5,10 +5,6 @@ import { AuthProvider } from './auth-context'
 import { InvoiceProvider } from './invoice-context'
 import { InitDemo } from './init-demo'
 import CookieConsent from './cookie-consent'
-import { CursorTrail } from '@/components/cursor-trail'
-import { FuturisticLoader } from '@/components/futuristic-loader'
-import { JsonLd } from '@/components/json-ld'
-import { PerformanceOptimizations } from '@/components/performance-optimizations'
 import './globals.css'
 
 const geist = Geist({ subsets: ["latin"] });
@@ -91,9 +87,6 @@ export default function RootLayout({
   return (
     <html lang="pl" className="bg-gradient-to-br from-slate-50 to-blue-50" suppressHydrationWarning>
       <head>
-        <PerformanceOptimizations />
-        <JsonLd />
-        
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
         <script dangerouslySetInnerHTML={{
@@ -115,8 +108,6 @@ export default function RootLayout({
           crossOrigin="anonymous" />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
-        <CursorTrail />
-        <FuturisticLoader />
         <AuthProvider>
           <InvoiceProvider>
             <InitDemo />
