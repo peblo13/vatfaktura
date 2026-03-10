@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card'
 import { getBlogPost, getAllBlogPosts } from '@/lib/blog-posts'
 import { ArrowLeft, Calendar, User, Clock } from 'lucide-react'
 import { notFound } from 'next/navigation'
+import { AdSenseDisplay300x250, AdSenseDisplayAuto } from '@/components/adsense-banner'
 
 export async function generateMetadata({
   params,
@@ -151,6 +152,11 @@ export default async function BlogArticle({
                 </p>
               )
             })}
+          </div>
+
+          {/* AdSense Banner - After content, before CTA */}
+          <div className="my-12">
+            <AdSenseDisplay300x250 />
           </div>
 
           {/* CTA */}

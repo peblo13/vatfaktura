@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { MobileNav } from '@/components/mobile-nav'
 import { PartnerPopup } from '@/components/partner-popup'
 import { SupportBanner } from '@/components/support-banner'
+import { AdSenseDisplayAuto, AdSenseDisplay728x90 } from '@/components/adsense-banner'
 
 export default function Home() {
   const router = useRouter()
@@ -145,6 +146,11 @@ export default function Home() {
           <p className="text-sm text-yellow-200/80 text-center">
             <span className="font-semibold">Ujawnienie:</span> VAT Faktura zawiera linki partnerskie. Jeśli dokonasz zakupu poprzez te linki, możemy otrzymać prowizję bez dodatkowych kosztów dla Ciebie. <a href="/disclaimer" className="text-yellow-300 hover:text-yellow-200 underline">Więcej informacji</a>
           </p>
+        </div>
+
+        {/* AdSense Banner - Below Affiliate Disclosure */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <AdSenseDisplay728x90 />
         </div>
 
         {/* Features */}

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { getAllBlogPosts } from '@/lib/blog-posts'
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
+import { AdSenseDisplayAuto, AdSenseDisplay300x250 } from '@/components/adsense-banner'
 
 export const metadata: Metadata = {
   title: 'Blog - VAT Faktura | Poradniki Fakturowania, KSEF, Podatki 2026',
@@ -78,6 +79,11 @@ export default function BlogPage() {
                 </Card>
               </Link>
             ))}
+          </div>
+
+          {/* AdSense Banner - Between articles and footer */}
+          <div className="mt-16">
+            <AdSenseDisplayAuto />
           </div>
         </div>
       </div>
