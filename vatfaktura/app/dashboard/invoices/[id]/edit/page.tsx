@@ -57,13 +57,16 @@ export default function EditInvoicePage() {
   const addItem = () => {
     const newItem: InvoiceItem = {
       id: Math.random().toString(36).substr(2, 9),
+      name: '',
       description: '',
       quantity: 1,
       unitPrice: 0,
       vat: 23,
+      taxPercent: 23,
     }
     setItems([...items, newItem])
   }
+
 
   const removeItem = (id: string) => {
     setItems(items.filter(item => item.id !== id))

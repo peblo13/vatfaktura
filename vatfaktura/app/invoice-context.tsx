@@ -4,10 +4,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 
 export interface InvoiceItem {
   id: string
+  name: string
   description: string
   quantity: number
   unitPrice: number
   vat: number
+  taxPercent?: number
 }
 
 export interface StatusChange {
@@ -28,6 +30,8 @@ export interface Invoice {
     email: string
     address: string
     nip: string
+    city?: string
+    postalCode?: string
   }
   items: InvoiceItem[]
   notes: string

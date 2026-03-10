@@ -22,8 +22,8 @@ const DEFAULT_TEMPLATES = [
       sellerName: 'ABC Sp. z o.o.',
       buyerName: 'XYZ Sp. z o.o.',
       items: [
-        { description: 'Usługi programistyczne', quantity: 10, unitPrice: 500, vat: 23 },
-        { description: 'Wsparcie techniczne', quantity: 5, unitPrice: 200, vat: 23 }
+        { name: 'Usługi programistyczne', description: 'Usługi programistyczne', quantity: 10, unitPrice: 500, vat: 23 },
+        { name: 'Wsparcie techniczne', description: 'Wsparcie techniczne', quantity: 5, unitPrice: 200, vat: 23 }
       ]
     }
   },
@@ -39,7 +39,7 @@ const DEFAULT_TEMPLATES = [
       sellerName: 'Demo Company Sp. z o.o.',
       buyerName: 'Klient S.A.',
       items: [
-        { description: 'Produkt/Usługa', quantity: 1, unitPrice: 1000, vat: 23 }
+        { name: 'Produkt/Usługa', description: 'Produkt/Usługa', quantity: 1, unitPrice: 1000, vat: 23 }
       ]
     }
   },
@@ -55,9 +55,9 @@ const DEFAULT_TEMPLATES = [
       sellerName: 'Modern Tech Ltd.',
       buyerName: 'Enterprise Corp.',
       items: [
-        { description: 'Konsultacja', quantity: 8, unitPrice: 750, vat: 23 },
-        { description: 'Wdrożenie', quantity: 40, unitPrice: 300, vat: 23 },
-        { description: 'Szkolenie', quantity: 4, unitPrice: 400, vat: 23 }
+        { name: 'Konsultacja', description: 'Konsultacja', quantity: 8, unitPrice: 750, vat: 23 },
+        { name: 'Wdrożenie', description: 'Wdrożenie', quantity: 40, unitPrice: 300, vat: 23 },
+        { name: 'Szkolenie', description: 'Szkolenie', quantity: 4, unitPrice: 400, vat: 23 }
       ]
     }
   },
@@ -87,10 +87,12 @@ export default function TemplatesPage() {
     // Create invoice from template
     const items = template.preview.items.map((item) => ({
       id: Math.random().toString(36).substr(2, 9),
+      name: item.name || item.description,
       description: item.description,
       quantity: item.quantity,
       unitPrice: item.unitPrice,
       vat: item.vat,
+      taxPercent: item.vat,
     }))
 
     const invoice = {
@@ -103,6 +105,8 @@ export default function TemplatesPage() {
         email: '',
         address: '',
         nip: '',
+        city: '',
+        postalCode: '',
       },
       items,
       notes: '',
@@ -140,10 +144,10 @@ export default function TemplatesPage() {
 
       {/* Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-        <h2 className="text-lg font-semibold text-blue-300 mb-6">Dostępne szablony - Wybierz szybko</h2>
+        <h2 className="text-lg sm:text-xl font-semibold text-blue-300 mb-6 sm:mb-8">Dostępne szablony - Wybierz szybko</h2>
         
-        {/* Carousel Container */}
-        <div className="mb-12">
+        {/* Desktop Carousel - Visible on lg and up */}
+        <div className="hidden lg:block mb-12">
           <div className="flex items-center gap-4">
             {/* Left Arrow */}
             <button
@@ -154,7 +158,7 @@ export default function TemplatesPage() {
             </button>
 
             {/* Carousel - Single visible template at 50% scale */}
-            <div className="flex-1 min-h-[320px] flex items-center justify-center relative">
+            <div className="flex-1 min-h-[420px] flex items-center justify-center relative">
               <div className="w-full transform scale-50 origin-center relative">
                 {DEFAULT_TEMPLATES.map((template, index) => (
                   <div
@@ -238,6 +242,70 @@ export default function TemplatesPage() {
               />
             ))}
           </div>
+        </div>
+
+        {/* Mobile Grid Layout - Visible on sm/md, hidden on lg+ */}
+        <div className="lg:hidden space-y-4">
+          {DEFAULT_TEMPLATES.map((template, index) => (
+            <div key={template.id} className="relative group">
+              <div className={`absolute inset-0 bg-gradient-to-br ${
+                template.color === 'blue' ? 'from-blue-500/30 to-cyan-500/30' :
+                template.color === 'gray' ? 'from-slate-500/30 to-slate-600/30' :
+                'from-purple-500/30 to-pink-500/30'
+              } rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition duration-500`}></div>
+              
+              <Card className="relative bg-slate-800/50 backdrop-blur-sm border-blue-500/20 shadow-lg overflow-hidden hover:border-blue-500/50 transition-all">
+                <div className={`h-16 sm:h-20 bg-gradient-to-br ${
+                  template.color === 'blue' ? 'from-blue-500 to-cyan-500' :
+                  template.color === 'gray' ? 'from-slate-500 to-slate-600' :
+                  'from-purple-500 to-pink-500'
+                }`} />
+                
+                <div className="p-4 sm:p-5 border-b border-blue-500/20">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-1">{template.name}</h3>
+                  <p className="text-blue-200/70 text-xs sm:text-sm">{template.description}</p>
+                </div>
+
+                <div className="p-4 sm:p-5 border-b border-blue-500/20 bg-slate-900/20">
+                  <p className="text-xs text-blue-200/50 mb-3 font-medium">PODGLĄD</p>
+                  <div className="space-y-1.5 text-xs sm:text-sm text-blue-100">
+                    <div className="flex justify-between">
+                      <span className="text-blue-300">Numer:</span>
+                      <span className="font-mono text-xs">{template.preview.number}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-300">Wystawiający:</span>
+                      <span className="text-right text-xs">{template.preview.sellerName}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-300">Nabywca:</span>
+                      <span className="text-right text-xs">{template.preview.buyerName}</span>
+                    </div>
+                    <div className="flex justify-between mt-2 pt-2 border-t border-blue-500/20">
+                      <span className="text-blue-300">Pozycji:</span>
+                      <span>{template.preview.items.length}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-300">Wartość:</span>
+                      <span className="font-semibold text-cyan-300">
+                        {template.preview.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0).toLocaleString('pl-PL')} PLN
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 sm:p-5 flex gap-2 sm:gap-3">
+                  <Button
+                    onClick={() => handleSelectTemplate(template)}
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 text-xs sm:text-sm min-h-[40px]"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Wybierz
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          ))}
         </div>
       </main>
     </div>

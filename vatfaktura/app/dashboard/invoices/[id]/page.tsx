@@ -174,29 +174,44 @@ export default function InvoiceViewPage() {
     setKsefStatus({ submitting: true, submitted: false, error: null })
 
     try {
+      // Przygotowanie danych z wszystkimi wymaganymi polami
       const response = await fetch('/api/ksef/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          invoiceNumber: invoice.number,
+          userId: user.id,
+          invoiceId: invoice.id,
           invoiceData: {
             number: invoice.number,
             issueDate: invoice.issueDate,
             dueDate: invoice.dueDate,
+            currency: 'PLN',
             seller: {
               name: user.company,
               nip: user.nip,
+              address: user.address || '',
+              city: user.city || '',
+              postalCode: user.postalCode || '',
             },
             buyer: {
               name: invoice.client.name,
-              nip: invoice.client.nip,
-              address: invoice.client.address,
+              nip: invoice.client.nip || '',
+              address: invoice.client.address || '',
+              city: invoice.client.city || '',
+              postalCode: invoice.client.postalCode || '',
             },
-            items: invoice.items,
-            total: invoice.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0),
-            vat: (invoice.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0) * 0.23),
+            items: invoice.items.map((item, idx) => ({
+              id: item.id || String(idx + 1),
+              name: item.name,
+              description: item.description || item.name,
+              quantity: item.quantity,
+              unitCode: 'EA', // Each/piece
+              unitPrice: item.unitPrice,
+              taxPercent: item.taxPercent || 23,
+            })),
+            notes: invoice.notes || '',
           },
         }),
       })
@@ -204,24 +219,32 @@ export default function InvoiceViewPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Błąd przy wysyłaniu do kSEF')
+        throw new Error(data.message || data.error || 'Błąd przy wysyłaniu do kSEF')
       }
 
       setKsefStatus({
         submitting: false,
         submitted: true,
         error: null,
-        reference: data.kSEFReference,
+        reference: data.data?.referenceNumber || data.referenceNumber,
       })
 
+      // Zaktualizuj status faktury
       updateInvoiceStatus(invoice.id, 'sent', user.email || 'System')
       setInvoice({ ...invoice, status: 'sent' })
+
+      // Pokaż wiadomość o sukcesie
+      setTimeout(() => {
+        alert('Faktura wysłana do kSEF pomyślnie!')
+      }, 100)
     } catch (error) {
+      console.error('[v0] kSEF submit error:', error)
       setKsefStatus({
         submitting: false,
         submitted: false,
         error: error instanceof Error ? error.message : 'Nieznany błąd',
       })
+      alert(`Błąd wysłania do kSEF: ${error instanceof Error ? error.message : 'Nieznany błąd'}`)
     }
   }
 

@@ -46,18 +46,18 @@ export default function DashboardStats({ invoices }: DashboardStatsProps) {
   ]
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
       {stats.map((stat) => (
         <div key={stat.label} className="group relative">
-          <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-xl blur opacity-0 group-hover:opacity-50 transition duration-300`}></div>
-          <Card className="relative p-6 bg-slate-800/50 backdrop-blur-sm border-blue-500/20 hover:border-blue-500/50 transition-all shadow-lg">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-blue-200/70 text-sm font-medium">{stat.label}</p>
-                <p className="text-4xl font-bold text-white mt-2">{stat.value}</p>
-              </div>
-              <div className={`p-3 rounded-lg bg-gradient-to-br ${stat.gradient}`}>
-                <stat.icon className={`w-6 h-6 ${stat.color}`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-lg sm:rounded-xl blur opacity-0 group-hover:opacity-50 transition duration-300`}></div>
+          <Card className="relative p-3 sm:p-4 md:p-6 bg-slate-800/50 backdrop-blur-sm border-blue-500/20 hover:border-blue-500/50 transition-all shadow-lg">
+            <div className="flex flex-col items-start gap-2 sm:gap-3">
+              <p className="text-blue-200/70 text-xs sm:text-sm font-medium line-clamp-2">{stat.label}</p>
+              <div className="flex items-end justify-between w-full">
+                <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{stat.value}</p>
+                <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-br ${stat.gradient}`}>
+                  <stat.icon className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ${stat.color}`} />
+                </div>
               </div>
             </div>
           </Card>
