@@ -140,6 +140,13 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Affiliate Disclosure */}
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-12">
+          <p className="text-sm text-yellow-200/80 text-center">
+            <span className="font-semibold">Ujawnienie:</span> VAT Faktura zawiera linki partnerskie. Jeśli dokonasz zakupu poprzez te linki, możemy otrzymać prowizję bez dodatkowych kosztów dla Ciebie. <a href="/disclaimer" className="text-yellow-300 hover:text-yellow-200 underline">Więcej informacji</a>
+          </p>
+        </div>
+
         {/* Features */}
         <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32 relative">
           <div className="relative z-10">
@@ -262,23 +269,15 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32" id="keywords">
           <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-8 sm:p-12 md:p-16 border border-blue-500/20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-              Program do Fakturowania 100% Za Darmo - Wszystko Czego Potrzebujesz
+              Program do Fakturowania 100% Za Darmo
             </h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { title: 'Program do Fakturowania', desc: 'Profesjonalny program do fakturowania dla małych firm i freelancerów', link: '/blog/system-fakturowania-dla-malych-firm' },
-                { title: 'Faktury Za Darmo', desc: 'Twórz nieograniczoną ilość faktur bez żadnych opłat', link: '/faq' },
-                { title: 'Fakturowanie Online', desc: 'Szybkie i łatwe fakturowanie poprzez przeglądarkę', link: '/blog/darmowe-programy-do-fakturowania-porownanie' },
-                { title: 'Generator Faktur', desc: 'Automatyczny generator profesjonalnych faktur w 30 sekund', link: '/faq' },
-                { title: 'Integracja KSEF', desc: 'Pełna integracja z Krajowym Systemem e-Faktur', link: '/blog/kompletny-przewodnik-po-ksef' },
-                { title: 'E-Faktury', desc: 'Wysyłaj faktury elektroniczne bezpośrednio do kSEF', link: '/blog/kompletny-przewodnik-po-ksef' },
-                { title: 'Faktury VAT', desc: 'Kompleksowe zarządzanie fakturami VAT i podatkami', link: '/blog/jak-prawidlowo-wystawic-fakture-vat' },
-                { title: 'Aplikacja do Faktur', desc: 'Mobilna aplikacja do zarządzania wszystkimi fakturami', link: '/faq' },
-                { title: 'Faktury dla Firm', desc: 'Idealne rozwiązanie dla małych i średnich przedsiębiorstw', link: '/blog/system-fakturowania-dla-malych-firm' },
-                { title: 'Najlepszy Program Faktura', desc: 'Najlepszy bezpłatny program do fakturowania na rynku', link: '/pricing' },
-                { title: 'Fakturowanie dla Freelancerów', desc: 'Specjalne funkcje dla samozatrudnionych', link: '/blog/fakturowanie-dla-freelancerow-praktyczny-poradnik' },
-                { title: 'System Fakturowania', desc: 'Zaawansowany system zarządzania fakturami i dokumentami', link: '/blog/system-fakturowania-dla-malych-firm' },
+                { title: 'Program do Fakturowania', desc: 'Profesjonalny program dla firm i freelancerów', link: '/blog/system-fakturowania-dla-malych-firm' },
+                { title: 'Faktury Za Darmo', desc: 'Wystawiaj faktury bez żadnych opłat', link: '/faq' },
+                { title: 'Integracja KSEF', desc: 'Pełna integracja z systemem e-faktur', link: '/blog/kompletny-przewodnik-po-ksef' },
+                { title: 'Faktury VAT', desc: 'Zarządzanie fakturami VAT i podatkami', link: '/blog/jak-prawidlowo-wystawic-fakture-vat' },
               ].map((item, idx) => (
                 <Link key={idx} href={item.link}>
                   <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-4 hover:bg-blue-500/20 transition-all cursor-pointer group">
@@ -291,12 +290,12 @@ export default function Home() {
 
             <div className="mt-12 pt-8 border-t border-blue-500/20 text-center">
               <p className="text-blue-200/70 text-sm sm:text-base mb-6">
-                VAT Faktura to kompleksowe rozwiązanie do fakturowania dostępne 100% za darmo, bez limitów i bez ukrytych opłat. Integracja z kSEF, szybkie tworzenie faktur, i wiele innych funkcji dla Twojej firmy.
+                VAT Faktura to kompleksowe rozwiązanie do fakturowania dostępne 100% za darmo. Bezpieczne, proste i zintegrowane z systemem KSEF.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/register">
                   <Button className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 shadow-lg shadow-green-500/50 font-bold">
-                    Zacznij Fakturować Za Darmo Teraz
+                    Zacznij Za Darmo
                   </Button>
                 </Link>
                 <Link href="/faq">
@@ -306,7 +305,7 @@ export default function Home() {
                 </Link>
                 <Link href="/blog">
                   <Button variant="outline" className="border-blue-500/50 hover:bg-blue-500/20 text-blue-300 font-bold">
-                    Czytaj Blog
+                    Artykuły
                   </Button>
                 </Link>
               </div>
@@ -527,9 +526,13 @@ export default function Home() {
             <div className="border-t border-white/10 pt-8 text-center text-sm text-blue-200/60">
               <p>&copy; 2026 VAT Faktura. Wszystkie prawa zastrzeżone.</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs">
+                <a href="/about" className="text-blue-300 hover:text-blue-100 transition">O nas</a>
+                <span className="text-blue-500/30">•</span>
                 <a href="/privacy" className="text-blue-300 hover:text-blue-100 transition">Polityka Prywatności</a>
                 <span className="text-blue-500/30">•</span>
                 <a href="/terms" className="text-blue-300 hover:text-blue-100 transition">Warunki Użytkowania</a>
+                <span className="text-blue-500/30">•</span>
+                <a href="/disclaimer" className="text-blue-300 hover:text-blue-100 transition">Disclaimer</a>
                 <span className="text-blue-500/30">•</span>
                 <a href="/contact" className="text-blue-300 hover:text-blue-100 transition">Kontakt</a>
               </div>

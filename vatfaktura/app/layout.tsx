@@ -93,6 +93,22 @@ export default function RootLayout({
       <head>
         <PerformanceOptimizations />
         <JsonLd />
+        
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }} />
+        
+        {/* Google Search Console */}
+        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
         <CursorTrail />
