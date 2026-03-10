@@ -4,8 +4,11 @@ import { useEffect } from 'react'
 
 export function InitDemo() {
   useEffect(() => {
-    // Initialize demo account if it doesn't exist
-    const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
+    try {
+      if (typeof window === 'undefined') return
+      
+      // Initialize demo account if it doesn't exist
+      const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
     
     if (!users.some((u: any) => u.email === 'demo@test.com')) {
       users.push({
@@ -81,6 +84,9 @@ export function InitDemo() {
         },
       ]
       localStorage.setItem('vatfaktura_invoices', JSON.stringify(demoInvoices))
+    }
+    } catch (error) {
+      console.error('[v0] InitDemo failed:', error)
     }
   }, [])
 

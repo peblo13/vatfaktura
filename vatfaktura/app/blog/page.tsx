@@ -7,9 +7,9 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import { AdSenseDisplayAuto, AdSenseDisplay300x250 } from '@/components/adsense-banner'
 
 export const metadata: Metadata = {
-  title: 'Blog - VAT Faktura | Poradniki Fakturowania, KSEF, Podatki 2026',
-  description: 'Poradniki, artykuły i wskazówki dotyczące fakturowania, KSEF, VAT, podatków dla freelancerów i firm. Wszystko czego potrzebujesz wiedzieć o e-fakturach.',
-  keywords: 'blog fakturowanie, KSEF poradnik, faktura VAT, podatki dla firm, e-faktury, poradniki',
+  title: 'Blog - VAT Faktura | Poradniki Fakturowania, KSEF, PIT, Podatki 2026',
+  description: 'Poradniki, artykuły i wskazówki dotyczące fakturowania, KSEF, VAT, PIT, rozliczeń podatkowych dla freelancerów i firm. Wszystko czego potrzebujesz wiedzieć o e-fakturach i rozliczeniach.',
+  keywords: 'blog fakturowanie, KSEF poradnik, faktura VAT, podatki dla firm, e-faktury, PIT-37, PIT-36, rozliczenia',
 }
 
 export default function BlogPage() {

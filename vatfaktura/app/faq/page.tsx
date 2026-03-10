@@ -6,9 +6,9 @@ import { ChevronDown } from 'lucide-react'
 import { AdSenseDisplayAuto, AdSenseDisplay300x250 } from '@/components/adsense-banner'
 
 export const metadata: Metadata = {
-  title: 'FAQ - VAT Faktura | 20 Odpowiedzi na Pytania o Fakturach, KSEF, Programie',
-  description: 'Kompletne FAQ VAT Faktura. 20 najczęściej zadawanych pytań dotyczących bezpłatnego programu do fakturowania, KSEF, bezpieczeństwa danych i integracji.',
-  keywords: 'FAQ fakturowanie, pytania i odpowiedzi, KSEF, VAT Faktura, e-faktury, bezpieczeństwo',
+  title: 'FAQ - VAT Faktura | Pytania o Fakturach, KSEF, PIT, Rozliczeniach',
+  description: 'Kompletne FAQ VAT Faktura. Odpowiedzi na pytania o fakturach VAT, KSEF, systemie rozliczeń PIT, e-podatki, bezpieczeństwie i integracji.',
+  keywords: 'FAQ fakturowanie, pytania o PIT, KSEF, VAT Faktura, e-faktury, rozliczenia podatkowe',
 }
 
 export default function FAQPage() {
@@ -90,20 +90,36 @@ export default function FAQPage() {
       answer: 'Tak, możesz wystawiać faktury zaliczki i faktury końcowe. System automatycznie śledzi zaliczki na kontach.'
     },
     {
-      question: 'Jakie języki wspiera VAT Faktura?',
-      answer: 'Aplikacja wspiera polski i angielski. Faktury mogą być wysyłane w dowolnym języku poprzez KSEF.'
+      question: 'Czy mogę mam system do rozliczania PIT w VAT Faktura?',
+      answer: 'Tak! VAT Faktura ma pełny system rozliczeń PIT. Możesz tworzyć deklaracje PIT-37 i PIT-36, zarządzać kosztami UPZ, generować raporty JPK-V7 i wysyłać deklaracje do e-podatki bezpośrednio z aplikacji.'
     },
     {
-      question: 'Czy VAT Faktura ma API dla integracji z innymi systemami?',
-      answer: 'Tak, API jest dostępne dla zaawansowanych użytkowników. Skontaktuj się z nami aby otrzymać dokumentację API.'
+      question: 'Jak prawidłowo wypełnić deklarację PIT-37?',
+      answer: 'PIT-37 musisz wypełnić ze wszystkimi przychody i kosztami. W VAT Faktura wystarczy wpisać przychody i koszty, a system automatycznie oblicza podatek. Zapoznaj się z artykułem "Jak Rozliczyć się z PIT-37" w naszym blogu.'
     },
     {
-      question: 'Czy mogę zmienić dane firmy w VAT Faktura?',
-      answer: 'Tak, dane firmy można edytować w ustawieniach konta. Zmiany dotyczą wszystkich przyszłych faktur.'
+      question: 'Kiedy muszę wysłać PIT-37 lub PIT-36?',
+      answer: 'PIT-37 (przedsiębiorcy): do 30 kwietnia elektronicznie lub 31 maja papierowo. PIT-36 (osoby fizyczne): do 30 kwietnia. Po terminie grozi kara 200 PLN za każdy miesiąc zwłoki.'
     },
     {
-      question: 'Czy VAT Faktura ma sms/email przypomnienia o terminie zapłaty?',
-      answer: 'Funkcja powiadomień jest dostępna w ustawieniach. Możesz otrzymywać przypomnienia o zbliżających się terminach.'
+      question: 'Jakie koszty mogę odliczać w PIT?',
+      answer: 'Możesz odliczać koszty bezpośrednio związane z zarobkowaniem: artykuły biurowe, czynsz, oprogramowanie, szkolenia, amortyzę majątku. Każdy koszt wymaga faktury VAT. VAT Faktura pomaga dokumentować wszystkie koszty.'
+    },
+    {
+      question: 'Czy mogę wysłać PIT przez e-podatki z VAT Faktura?',
+      answer: 'Tak, VAT Faktura automatycznie wysyła Twoją deklarację do e-podatki. Wystarczy kliknąć przycisk "Wyślij do e-podatki" a system obsługuje całą procedurę. Otrzymasz potwierdzenie wysyłki.'
+    },
+    {
+      question: 'Co to jest JPK-V7 i czy muszę to wysyłać?',
+      answer: 'JPK-V7 to zintegrowany raport VAT i PIT obowiązkowy od 2026. VAT Faktura automatycznie tworzy i wysyła JPK-V7. Zawiera wszystkie faktury VAT i dane dotyczące podatku dochodowego.'
+    },
+    {
+      question: 'Czy mogę zmienić wysłaną deklarację PIT?',
+      answer: 'Tak, możesz wysłać korektę deklaracji w dowolnym momencie. VAT Faktura obsługuje zmianę deklaracji - wysyłasz ją ponownie ze zmienionymi danymi, a system automatycznie zastępuje starą wersję.'
+    },
+    {
+      question: 'Jak często muszę raportować do e-podatki?',
+      answer: 'PIT-37/PIT-36 raz w roku (do końca kwietnia). JPK-V7 co miesiąc (do 25 dnia następnego miesiąca). VAT (dla płatników VAT) co miesiąc.'
     },
   ]
 

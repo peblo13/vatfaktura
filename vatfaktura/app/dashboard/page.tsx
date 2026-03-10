@@ -1,14 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Plus, LogOut, FileText, CreditCard, Search, Filter, X } from 'lucide-react'
+import { Plus, LogOut, FileText, CreditCard } from 'lucide-react'
 import Link from 'next/link'
-import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
 import { SupportBanner } from '@/components/support-banner'
 
@@ -16,9 +13,6 @@ export default function DashboardPage() {
   const router = useRouter()
   const { user, isLoading, logout } = useUser()
   const { getInvoicesByUser } = useInvoices()
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterStatus, setFilterStatus] = useState<'all' | 'draft' | 'sent' | 'paid'>('all')
-  const [sortBy, setSortBy] = useState<'date' | 'amount' | 'client'>('date')
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -35,30 +29,6 @@ export default function DashboardPage() {
   }
 
   const userInvoices = getInvoicesByUser(user.id)
-
-  // Filtrowanie i sortowanie
-  const filteredInvoices = userInvoices
-    .filter(invoice => {
-      const matchesSearch = 
-        invoice.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        invoice.client.name.toLowerCase().includes(searchTerm.toLowerCase())
-      
-      const matchesStatus = filterStatus === 'all' || invoice.status === filterStatus
-      
-      return matchesSearch && matchesStatus
-    })
-    .sort((a, b) => {
-      if (sortBy === 'date') {
-        return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime()
-      } else if (sortBy === 'amount') {
-        const totalA = a.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0)
-        const totalB = b.items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0)
-        return totalB - totalA
-      } else if (sortBy === 'client') {
-        return a.client.name.localeCompare(b.client.name)
-      }
-      return 0
-    })
 
   const handleLogout = () => {
     logout()
@@ -101,107 +71,45 @@ export default function DashboardPage() {
         <DashboardStats invoices={userInvoices} />
 
         {/* Action Buttons */}
-        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
           <Link href="/dashboard/create-invoice" className="group">
-            <Button className="w-full min-h-[44px] text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/75 transition-all">
-              <Plus className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/75 transition-all rounded px-3 py-2 text-white flex items-center justify-center gap-1">
+              <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Nowa faktura</span>
               <span className="sm:hidden">Nowa</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/templates" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
-              <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Szablony</span>
               <span className="sm:hidden">Sza</span>
-            </Button>
+            </button>
+          </Link>
+          <Link href="/blog" className="group">
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Blog</span>
+              <span className="sm:hidden">Blog</span>
+            </button>
           </Link>
           <Link href="/dashboard/billing" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
-              <CreditCard className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <CreditCard className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>Plan</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/settings" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
               <span className="hidden sm:inline">Ustawienia</span>
               <span className="sm:hidden">Ust</span>
-            </Button>
+            </button>
           </Link>
         </div>
 
         {/* Invoices List */}
         <div className="mt-6 sm:mt-8">
-          <div className="mb-4 sm:mb-6 space-y-3 sm:space-y-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-blue-300/50" />
-              <Input
-                type="text"
-                placeholder="Szukaj faktury..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 sm:pl-10 bg-slate-700/50 border-blue-500/30 text-white placeholder:text-blue-300/50 focus:border-blue-500/50 min-h-[44px] text-sm"
-              />
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-300/50 hover:text-blue-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                >
-                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button>
-              )}
-            </div>
-
-            {/* Filters */}
-            <div className="flex flex-col gap-3 sm:gap-4">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Filter className="w-4 h-4 text-blue-300/70 flex-shrink-0" />
-                <span className="text-xs sm:text-sm text-blue-300/70">Status:</span>
-                <div className="flex gap-1 sm:gap-2 flex-wrap flex-1">
-                  {(['all', 'draft', 'sent', 'paid'] as const).map((status) => (
-                    <button
-                      key={status}
-                      onClick={() => setFilterStatus(status)}
-                      className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[36px] sm:min-h-[40px] flex items-center justify-center ${
-                        filterStatus === status
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-slate-700/50 text-blue-300/70 hover:bg-slate-700'
-                      }`}
-                    >
-                      {status === 'all' ? 'Wszystkie' : status === 'draft' ? 'Drafty' : status === 'sent' ? 'Wysłane' : 'Zapłacone'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs sm:text-sm text-blue-300/70">Sortuj:</span>
-                <div className="flex gap-1 sm:gap-2 flex-wrap flex-1">
-                  {(['date', 'amount', 'client'] as const).map((sort) => (
-                    <button
-                      key={sort}
-                      onClick={() => setSortBy(sort)}
-                      className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[36px] sm:min-h-[40px] flex items-center justify-center ${
-                        sortBy === sort
-                          ? 'bg-cyan-600 text-white'
-                          : 'bg-slate-700/50 text-blue-300/70 hover:bg-slate-700'
-                      }`}
-                    >
-                      {sort === 'date' ? 'Dacie' : sort === 'amount' ? 'Kwocie' : 'Kliencie'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Results Count */}
-            <p className="text-xs sm:text-sm text-blue-300/70">
-              Znaleziono {filteredInvoices.length} faktur{filteredInvoices.length === 1 ? 'ę' : filteredInvoices.length % 10 === 2 || filteredInvoices.length % 10 === 3 || filteredInvoices.length % 10 === 4 ? 'y' : ''}
-            </p>
-          </div>
-
-          <InvoicesList invoices={filteredInvoices} />
+          <p className="text-blue-300/70 text-sm">Masz {userInvoices.length} faktur{userInvoices.length === 1 ? 'ę' : ''}. Faktury zostaną wkrótce wyświetlone tutaj.</p>
         </div>
       </main>
     </div>

@@ -58,51 +58,121 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
   const [templates, setTemplates] = useState<any[]>([])
 
   useEffect(() => {
-    const stored = localStorage.getItem('vatfaktura_invoices')
-    if (stored) {
-      setInvoices(JSON.parse(stored))
-    }
-    const storedTemplates = localStorage.getItem('vatfaktura_templates')
-    if (storedTemplates) {
-      setTemplates(JSON.parse(storedTemplates))
+    try {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('vatfaktura_invoices')
+        if (stored) {
+          setInvoices(JSON.parse(stored))
+        }
+        const storedTemplates = localStorage.getItem('vatfaktura_templates')
+        if (storedTemplates) {
+          setTemplates(JSON.parse(storedTemplates))
+        }
+      }
+    } catch (error) {
+      console.error('[v0] Failed to load invoices and templates:', error)
     }
   }, [])
 
   const addInvoice = (invoice: Invoice) => {
-    const updated = [...invoices, invoice]
-    setInvoices(updated)
-    localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+    try {
+      const updated = [...invoices, invoice]
+      setInvoices(updated)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('[v0] Failed to add invoice:', error)
+    }
   }
 
   const updateInvoice = (id: string, updates: Partial<Invoice>) => {
-    const updated = invoices.map(inv => inv.id === id ? { ...inv, ...updates } : inv)
-    setInvoices(updated)
-    localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+    try {
+      const updated = invoices.map(inv => inv.id === id ? { ...inv, ...updates } : inv)
+      setInvoices(updated)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('[v0] Failed to update invoice:', error)
+    }
   }
 
   const updateInvoiceStatus = (id: string, newStatus: Invoice['status'], userName: string) => {
-    const updated = invoices.map(inv => {
-      if (inv.id === id) {
-        const statusHistory = [
-          ...(inv.statusHistory || []),
-          {
-            status: newStatus,
-            changedAt: new Date().toISOString(),
-            changedBy: userName,
-          }
-        ]
-        return { ...inv, status: newStatus, statusHistory }
+    try {
+      const updated = invoices.map(inv => {
+        if (inv.id === id) {
+          const statusHistory = [
+            ...(inv.statusHistory || []),
+            {
+              status: newStatus,
+              changedAt: new Date().toISOString(),
+              changedBy: userName,
+            }
+          ]
+          return { ...inv, status: newStatus, statusHistory }
+        }
+        return inv
+      })
+      setInvoices(updated)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
       }
-      return inv
-    })
-    setInvoices(updated)
-    localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+    } catch (error) {
+      console.error('[v0] Failed to update invoice status:', error)
+    }
+  }
   }
 
   const deleteInvoice = (id: string) => {
-    const updated = invoices.filter(inv => inv.id !== id)
-    setInvoices(updated)
-    localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+    try {
+      const updated = invoices.filter(inv => inv.id !== id)
+      setInvoices(updated)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vatfaktura_invoices', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('[v0] Failed to delete invoice:', error)
+    }
+  }
+
+  const duplicateInvoice = (id: string): Invoice | null => {
+    try {
+      const invoice = invoices.find(inv => inv.id === id)
+      if (!invoice) return null
+
+      const duplicated: Invoice = {
+        ...invoice,
+        id: `inv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        number: `${invoice.number}-kopija`,
+        status: 'draft',
+        statusHistory: [],
+        issueDate: new Date().toISOString().split('T')[0],
+        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      }
+
+      addInvoice(duplicated)
+      return duplicated
+    } catch (error) {
+      console.error('[v0] Failed to duplicate invoice:', error)
+      return null
+    }
+  }
+
+  const getInvoicesByUser = (userId: string) => {
+    return invoices.filter(inv => inv.userId === userId)
+  }
+
+  const saveTemplate = (template: any) => {
+    try {
+      const updated = [...templates, template]
+      setTemplates(updated)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vatfaktura_templates', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('[v0] Failed to save template:', error)
+    }
   }
 
   const duplicateInvoice = (id: string): Invoice | null => {
