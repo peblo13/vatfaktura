@@ -192,3 +192,47 @@ export function calculateEffectiveTaxRate(tax: number, income: number): number {
   if (income <= 0) return 0
   return (tax / income) * 100
 }
+
+// Standard deductions for different cost categories
+export const STANDARD_DEDUCTIONS = {
+  office: {
+    name: 'Biuro / Pomieszczenia',
+    description: 'Czynsz, media, utrzymanie',
+    deductiblePercent: 100,
+  },
+  equipment: {
+    name: 'Urządzenia i Wyposażenie',
+    description: 'Maszyny, komputery, urządzenia',
+    deductiblePercent: 100,
+  },
+  vehicle: {
+    name: 'Pojazd',
+    description: 'Benzyna, ubezpieczenie, naprawy',
+    deductiblePercent: 100,
+  },
+  professional: {
+    name: 'Usługi Zawodowe',
+    description: 'Doradztwo, audyt, książkowość',
+    deductiblePercent: 100,
+  },
+  meals: {
+    name: 'Posiłki',
+    description: 'Posiłki pracowników',
+    deductiblePercent: 100,
+  },
+  travel: {
+    name: 'Podróże Służbowe',
+    description: 'Transport, noclegi',
+    deductiblePercent: 100,
+  },
+  utilities: {
+    name: 'Media i Opał',
+    description: 'Gaz, ciepło, woda',
+    deductiblePercent: 100,
+  },
+  other: {
+    name: 'Inne',
+    description: 'Pozostałe koszty',
+    deductiblePercent: 100,
+  },
+}
