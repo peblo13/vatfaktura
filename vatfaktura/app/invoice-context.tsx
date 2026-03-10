@@ -58,16 +58,15 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
   const [templates, setTemplates] = useState<any[]>([])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     try {
-      if (typeof window !== 'undefined') {
-        const stored = localStorage.getItem('vatfaktura_invoices')
-        if (stored) {
-          setInvoices(JSON.parse(stored))
-        }
-        const storedTemplates = localStorage.getItem('vatfaktura_templates')
-        if (storedTemplates) {
-          setTemplates(JSON.parse(storedTemplates))
-        }
+      const stored = localStorage.getItem('vatfaktura_invoices')
+      if (stored) {
+        setInvoices(JSON.parse(stored))
+      }
+      const storedTemplates = localStorage.getItem('vatfaktura_templates')
+      if (storedTemplates) {
+        setTemplates(JSON.parse(storedTemplates))
       }
     } catch (error) {
       console.error('[v0] Failed to load invoices and templates:', error)
