@@ -24,50 +24,75 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('vatfaktura_user')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
+    try {
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('vatfaktura_user')
+        if (storedUser) {
+          setUser(JSON.parse(storedUser))
+        }
+      }
+    } catch (error) {
+      console.error('[v0] Failed to load user from localStorage:', error)
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }, [])
 
   const login = async (email: string, password: string) => {
-    const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
-    const userRecord = users.find((u: any) => u.email === email && u.password === password)
-    
-    if (!userRecord) {
-      throw new Error('Nieprawidłowe dane logowania')
-    }
+    try {
+      if (typeof window === 'undefined') return
+      const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
+      const userRecord = users.find((u: any) => u.email === email && u.password === password)
+      
+      if (!userRecord) {
+        throw new Error('Nieprawidłowe dane logowania')
+      }
 
-    const { password: _, ...userData } = userRecord
-    setUser(userData)
-    localStorage.setItem('vatfaktura_user', JSON.stringify(userData))
+      const { password: _, ...userData } = userRecord
+      setUser(userData)
+      localStorage.setItem('vatfaktura_user', JSON.stringify(userData))
+    } catch (error) {
+      console.error('[v0] Login failed:', error)
+      throw error
+    }
   }
 
   const register = async (email: string, password: string, company: string, nip: string) => {
-    const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
-    
-    if (users.find((u: any) => u.email === email)) {
-      throw new Error('Użytkownik z tym emailem już istnieje')
+    try {
+      if (typeof window === 'undefined') return
+      const users = JSON.parse(localStorage.getItem('vatfaktura_users') || '[]')
+      
+      if (users.find((u: any) => u.email === email)) {
+        throw new Error('Użytkownik z tym emailem już istnieje')
+      }
+
+      const newUser: User = {
+        id: Math.random().toString(36).substr(2, 9),
+        email,
+        company,
+        nip,
+      }
+
+      users.push({ ...newUser, password })
+      localStorage.setItem('vatfaktura_users', JSON.stringify(users))
+
+      setUser(newUser)
+      localStorage.setItem('vatfaktura_user', JSON.stringify(newUser))
+    } catch (error) {
+      console.error('[v0] Register failed:', error)
+      throw error
     }
-
-    const newUser: User = {
-      id: Math.random().toString(36).substr(2, 9),
-      email,
-      company,
-      nip,
-    }
-
-    users.push({ ...newUser, password })
-    localStorage.setItem('vatfaktura_users', JSON.stringify(users))
-
-    setUser(newUser)
-    localStorage.setItem('vatfaktura_user', JSON.stringify(newUser))
   }
 
   const logout = () => {
-    setUser(null)
-    localStorage.removeItem('vatfaktura_user')
+    try {
+      if (typeof window !== 'undefined') {
+        setUser(null)
+        localStorage.removeItem('vatfaktura_user')
+      }
+    } catch (error) {
+      console.error('[v0] Logout failed:', error)
+    }
   }
 
   return (
