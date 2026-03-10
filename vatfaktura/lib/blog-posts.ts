@@ -678,7 +678,7 @@ JPK-V7 to plik XML zawierający sekcje:
   <Deklaracja><!-- Dane VAT i PIT --></Deklaracja>
   <Faktury><!-- Wszystkie faktury --></Faktury>
 </root>
-```
+\`\`\`
 
 ## Błędy w JPK-V7
 

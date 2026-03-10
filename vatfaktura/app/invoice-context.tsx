@@ -136,52 +136,13 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
   }
 
   const duplicateInvoice = (id: string): Invoice | null => {
-    try {
-      const invoice = invoices.find(inv => inv.id === id)
-      if (!invoice) return null
-
-      const duplicated: Invoice = {
-        ...invoice,
-        id: `inv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        number: `${invoice.number}-kopija`,
-        status: 'draft',
-        statusHistory: [],
-        issueDate: new Date().toISOString().split('T')[0],
-        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      }
-
-      addInvoice(duplicated)
-      return duplicated
-    } catch (error) {
-      console.error('[v0] Failed to duplicate invoice:', error)
-      return null
-    }
-  }
-
-  const getInvoicesByUser = (userId: string) => {
-    return invoices.filter(inv => inv.userId === userId)
-  }
-
-  const saveTemplate = (template: any) => {
-    try {
-      const updated = [...templates, template]
-      setTemplates(updated)
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('vatfaktura_templates', JSON.stringify(updated))
-      }
-    } catch (error) {
-      console.error('[v0] Failed to save template:', error)
-    }
-  }
-
-  const duplicateInvoice = (id: string): Invoice | null => {
     const invoice = invoices.find(inv => inv.id === id)
     if (!invoice) return null
 
     const duplicated: Invoice = {
       ...invoice,
       id: `inv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      number: `${invoice.number}-kopія`,
+      number: `${invoice.number}-kopija`,
       status: 'draft',
       statusHistory: [],
       issueDate: new Date().toISOString().split('T')[0],
