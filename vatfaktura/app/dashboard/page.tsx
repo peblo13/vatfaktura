@@ -115,11 +115,11 @@ export default function DashboardPage() {
               <span className="sm:hidden">Sza</span>
             </button>
           </Link>
-          <Link href="/dashboard/pit" className="group">
+          <Link href="/blog" className="group">
             <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
               <Calculator className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Rozliczenia</span>
-              <span className="sm:hidden">PIT</span>
+              <span className="hidden sm:inline">Blog</span>
+              <span className="sm:hidden">Blog</span>
             </button>
           </Link>
           <Link href="/dashboard/billing" className="group">

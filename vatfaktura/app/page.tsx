@@ -271,52 +271,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PIT System - NOW AVAILABLE */}
-        <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20">
-          <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border border-purple-500/50 hover:border-purple-400/80 transition-all">
-            <div className="flex flex-col sm:flex-row items-center gap-8">
-              <div className="flex-1">
-                <div className="inline-block mb-4">
-                  <span className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider">
-                    ✨ DOSTĘPNE TERAZ
-                  </span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-purple-300 to-indigo-300 bg-clip-text text-transparent">
-                  System Rozliczeń PIT
-                </h2>
-                <p className="text-purple-100 text-base sm:text-lg leading-relaxed mb-4">
-                  Rozliczaj się z podatkami bezpośrednio na VAT Faktura.pl! Pełny system do zarządzania deklaracjami PIT-37, PIT-36, kosztami UPZ i wysyłką do e-podatki.
-                </p>
-                <ul className="space-y-2 mb-6 text-purple-200/90 text-sm sm:text-base">
-                  <li className="flex items-center gap-2">
-                    <span className="text-purple-300 font-bold">✓</span> Deklaracje PIT-37 dla przedsiębiorców
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-purple-300 font-bold">✓</span> Deklaracje PIT-36 dla osób fizycznych
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-purple-300 font-bold">✓</span> Zarządzanie kosztami UPZ
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-purple-300 font-bold">✓</span> Raportowanie JPK-V7 (VAT + PIT)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-purple-300 font-bold">✓</span> Wysyłka do e-podatki
-                  </li>
-                </ul>
-                <Link href="/dashboard/pit">
-                  <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-base px-8 py-3 shadow-lg shadow-purple-500/50">
-                    Przejdź do Rozliczeń PIT →
-                  </Button>
-                </Link>
-              </div>
-              <div className="flex-shrink-0 hidden sm:block relative">
-                <div className="w-40 h-40 bg-gradient-to-br from-purple-500 via-indigo-500 to-purple-500 rounded-xl opacity-30 blur-2xl animate-pulse"></div>
-                <div className="absolute inset-0 w-40 h-40 flex items-center justify-center text-5xl">📊</div>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Keywords Section */}
         <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32" id="keywords">
