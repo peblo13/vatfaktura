@@ -4,16 +4,16 @@ import { Mail, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
-  title: 'Kontakt - VAT Faktura',
-  description: 'Skontaktuj się z nami. Mamy pytania? Jesteśmy tutaj aby Ci pomóc.',
+  title: 'Kontakt - VAT Faktura | Paweł Śliwiński',
+  description: 'Skontaktuj się z Pawłem Śliwińskim - twórcą VAT Faktura. Pytania? Jesteśmy tutaj aby Ci pomóc.',
 }
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">Skontaktuj się z nami</h1>
-        <p className="text-blue-200/70 text-center text-lg mb-12">Masz pytania? Chętnie Ci pomożemy.</p>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">Skontaktuj się z Pawłem</h1>
+        <p className="text-blue-200/70 text-center text-lg mb-12">Jestem Paweł Śliwiński, twórca VAT Faktura. Masz pytania? Chętnie Ci pomogę.</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Email */}

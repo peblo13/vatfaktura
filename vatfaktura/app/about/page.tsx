@@ -66,7 +66,28 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Values */}
+        {/* Creator Info */}
+        <div className="mb-20 bg-slate-800/60 backdrop-blur-sm border border-cyan-500/30 rounded-2xl p-8 sm:p-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+            Twórca i Właściciel
+          </h2>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-cyan-300 mb-2">
+                Paweł Śliwiński
+              </h3>
+              <p className="text-blue-200/80 leading-relaxed mb-4">
+                Twórca i właściciel VAT Faktura. Programista i przedsiębiorca, który zdecydował się stworzyć bezpłatne rozwiązanie do fakturowania dla polskich freelancerów i małych firm.
+              </p>
+              <p className="text-blue-200/80 leading-relaxed mb-4">
+                Paweł wierzy że narzędzia biznesowe powinny być dostępne dla wszystkich bez względu na wielkość firmy lub budżet. VAT Faktura jest wynikiem tej pasji do tworzenia wartościowych produktów.
+              </p>
+              <p className="text-blue-200/70 text-sm">
+                Kontakt: <a href="mailto:fredbogus504@gmail.com" className="text-cyan-300 hover:text-cyan-200 underline">fredbogus504@gmail.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="mb-20">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12 text-center">
             Nasze Wartości
