@@ -109,6 +109,10 @@ export default function RootLayout({
         
         {/* Google Search Console */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+        
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9110227480064306"
+          crossOrigin="anonymous" />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
         <CursorTrail />

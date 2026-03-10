@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ChevronDown } from 'lucide-react'
+import { AdSenseDisplayAuto, AdSenseDisplay300x250 } from '@/components/adsense-banner'
 
 export const metadata: Metadata = {
   title: 'FAQ - VAT Faktura | 20 Odpowiedzi na Pytania o Fakturach, KSEF, Programie',
@@ -144,6 +145,11 @@ export default function FAQPage() {
                 </div>
               </Card>
             ))}
+          </div>
+
+          {/* AdSense Banner - After FAQ items */}
+          <div className="my-12">
+            <AdSenseDisplayAuto />
           </div>
 
           {/* CTA */}
