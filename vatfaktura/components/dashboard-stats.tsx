@@ -1,6 +1,5 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
 import { Invoice } from '@/app/invoice-context'
 import { FileText, CheckCircle, Clock, AlertCircle } from 'lucide-react'
 
@@ -50,7 +49,7 @@ export default function DashboardStats({ invoices }: DashboardStatsProps) {
       {stats.map((stat) => (
         <div key={stat.label} className="group relative">
           <div className={`absolute inset-0 bg-gradient-to-r ${stat.gradient} rounded-lg sm:rounded-xl blur opacity-0 group-hover:opacity-50 transition duration-300`}></div>
-          <Card className="relative p-3 sm:p-4 md:p-6 bg-slate-800/50 backdrop-blur-sm border-blue-500/20 hover:border-blue-500/50 transition-all shadow-lg">
+          <div className="relative p-3 sm:p-4 md:p-6 bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 hover:border-blue-500/50 transition-all shadow-lg rounded-lg sm:rounded-xl">
             <div className="flex flex-col items-start gap-2 sm:gap-3">
               <p className="text-blue-200/70 text-xs sm:text-sm font-medium line-clamp-2">{stat.label}</p>
               <div className="flex items-end justify-between w-full">
@@ -60,7 +59,7 @@ export default function DashboardStats({ invoices }: DashboardStatsProps) {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       ))}
     </div>

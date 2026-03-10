@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
-import { Input } from '@/components/ui/input'
-import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator } from 'lucide-react'
+import { Plus, LogOut, FileText, CreditCard, Search, Filter, X } from 'lucide-react'
 import Link from 'next/link'
-import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
 import { SupportBanner } from '@/components/support-banner'
 
@@ -15,9 +13,6 @@ export default function DashboardPage() {
   const router = useRouter()
   const { user, isLoading, logout } = useUser()
   const { getInvoicesByUser } = useInvoices()
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterStatus, setFilterStatus] = useState<'all' | 'draft' | 'sent' | 'paid'>('all')
-  const [sortBy, setSortBy] = useState<'date' | 'amount' | 'client'>('date')
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -34,18 +29,6 @@ export default function DashboardPage() {
   }
 
   const userInvoices = getInvoicesByUser(user.id)
-
-  // Filtrowanie i sortowanie
-  const filteredInvoices = userInvoices
-    .filter(invoice => {
-      const matchesSearch = 
-        invoice.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        invoice.client.name.toLowerCase().includes(searchTerm.toLowerCase())
-      
-      const matchesStatus = filterStatus === 'all' || invoice.status === filterStatus
-      
-      return matchesSearch && matchesStatus
-    })
     .sort((a, b) => {
       if (sortBy === 'date') {
         return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime()
@@ -138,26 +121,8 @@ export default function DashboardPage() {
 
         {/* Invoices List */}
         <div className="mt-6 sm:mt-8">
-          <div className="mb-4 sm:mb-6 space-y-3 sm:space-y-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-blue-300/50" />
-              <Input
-                type="text"
-                placeholder="Szukaj faktury..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 sm:pl-10 bg-slate-700/50 border-blue-500/30 text-white placeholder:text-blue-300/50 focus:border-blue-500/50 min-h-[44px] text-sm"
-              />
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm('')}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-300/50 hover:text-blue-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                >
-                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button>
-              )}
-            </div>
+          <p className="text-blue-300/70 text-sm">Twoje faktury będą wyświetlane tutaj...</p>
+        </div>
 
             {/* Filters */}
             <div className="flex flex-col gap-3 sm:gap-4">
