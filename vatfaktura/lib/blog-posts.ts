@@ -671,7 +671,7 @@ Aplikacja automatycznie tworzy JPK-V7 z Twoich danych:
 
 JPK-V7 to plik XML zawierający sekcje:
 
-```xml
+\`\`\`xml
 <?xml version="1.0"?>
 <root>
   <Identyfikacja><!-- Dane podatnika --></Identyfikacja>
