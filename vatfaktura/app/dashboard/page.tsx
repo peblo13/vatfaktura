@@ -4,13 +4,11 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator } from 'lucide-react'
 import Link from 'next/link'
 import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
-import PitDashboardWidget from '@/components/pit/pit-dashboard-widget'
 import { SupportBanner } from '@/components/support-banner'
 
 export default function DashboardPage() {
@@ -101,43 +99,40 @@ export default function DashboardPage() {
         {/* Stats */}
         <DashboardStats invoices={userInvoices} />
 
-        {/* PIT Widget */}
-        <PitDashboardWidget />
-
         {/* Action Buttons */}
         <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
           <Link href="/dashboard/create-invoice" className="group">
-            <Button className="w-full min-h-[44px] text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/75 transition-all">
-              <Plus className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg shadow-blue-500/50 group-hover:shadow-blue-500/75 transition-all rounded px-3 py-2 text-white flex items-center justify-center gap-1">
+              <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Nowa faktura</span>
               <span className="sm:hidden">Nowa</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/templates" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
-              <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Szablony</span>
               <span className="sm:hidden">Sza</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/pit" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all">
-              <Calculator className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 group-hover:border-purple-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <Calculator className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Rozliczenia</span>
               <span className="sm:hidden">PIT</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/billing" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
-              <CreditCard className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
+              <CreditCard className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>Plan</span>
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/settings" className="group">
-            <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
+            <button className="w-full min-h-[44px] text-xs sm:text-sm font-medium border border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all rounded px-3 py-2 flex items-center justify-center gap-1">
               <span className="hidden sm:inline">Ustawienia</span>
               <span className="sm:hidden">Ust</span>
-            </Button>
+            </button>
           </Link>
         </div>
 

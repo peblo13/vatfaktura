@@ -1,37 +1,27 @@
 'use client'
 
 import React from 'react'
-import { PitCalculatorForm } from '@/components/pit/pit-calculator-form'
 import Link from 'next/link'
 
 export default function PitCalculatorPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Navigation */}
-        <div className="mb-6">
-          <Link href="/dashboard/pit" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
-            ← Wróć do PIT
-          </Link>
+    <div className="min-h-screen relative">
+      {/* Header */}
+      <header className="bg-slate-900/40 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50 mb-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">Kalkulator PIT</h1>
+          <p className="text-purple-300/70 text-xs sm:text-sm mt-1">Szybko oblicz swój przychód, podatek i kwotę do zapłaty</p>
         </div>
+      </header>
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Kalkulator PIT</h1>
-          <p className="text-gray-600 mt-2">
-            Szybko oblicz swój przychód, podatek i kwotę do zapłaty. Kalkulator wspiera wszystkie źródła dochodów.
-          </p>
-        </div>
-
-        {/* Calculator */}
-        <PitCalculatorForm />
-
-        {/* Info Section */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4">Zawarte w kalkulatorze</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>✓ Polskie stawki podatku PIT 2024 (12% / 32%)</li>
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pb-8 relative z-10 space-y-6">
+        {/* Info Sections */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6">
+            <h3 className="font-semibold text-white mb-4">Zawarte w kalkulatorze</h3>
+            <ul className="space-y-2 text-sm text-blue-300/80">
+              <li>✓ Polskie stawki podatku PIT 2026 (12% / 32%)</li>
               <li>✓ Kwota wolna od podatku (3600 PLN)</li>
               <li>✓ Ulgi na dzieci i rodzinne</li>
               <li>✓ Składki ZUS i ubezpieczenie zdrowotne</li>
@@ -41,9 +31,9 @@ export default function PitCalculatorPage() {
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4">Masz pytania?</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6">
+            <h3 className="font-semibold text-white mb-4">Masz pytania?</h3>
+            <ul className="space-y-2 text-sm text-blue-300/80">
               <li><strong>Przychód brutto:</strong> całkowity zarobek przed opodatkowaniem</li>
               <li><strong>Koszty uzyskania:</strong> wydatki związane z zarabianiem</li>
               <li><strong>Kwota wolna:</strong> część dochodu nie podlegająca opodatkowaniu</li>
@@ -53,28 +43,28 @@ export default function PitCalculatorPage() {
           </div>
         </div>
 
-        {/* Next Steps */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="font-semibold text-blue-900 mb-4">Co dalej?</h3>
-          <p className="text-blue-800 text-sm mb-4">
-            Po obliczeniu podatku możesz:
+        {/* Info Banner */}
+        <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/30 rounded-lg p-6">
+          <h3 className="font-semibold text-purple-300 mb-4">Kalkulator znajduje się w opracowaniu</h3>
+          <p className="text-blue-300/80 text-sm mb-4">
+            Kalkulator PIT będzie wkrótce dostępny w aplikacji. Tymczasem możesz przejść do pozostałych funkcji rozliczeń PIT.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex gap-3 flex-wrap">
             <Link
-              href="/dashboard/pit/pit-37"
-              className="bg-white hover:bg-gray-50 border border-blue-200 rounded p-4 text-sm font-medium text-blue-600"
+              href="/dashboard/pit"
+              className="bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded px-4 py-2 transition-all"
             >
-              ✓ Stworzyć deklarację PIT-37
+              Wróć do rozliczeń
             </Link>
             <Link
               href="/dashboard/pit/costs"
-              className="bg-white hover:bg-gray-50 border border-blue-200 rounded p-4 text-sm font-medium text-blue-600"
+              className="border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 text-sm font-medium rounded px-4 py-2 transition-all"
             >
-              ✓ Zarządzać kosztami UPZ
+              Zarządzaj kosztami
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

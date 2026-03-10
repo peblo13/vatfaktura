@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { Calculator, TrendingUp } from 'lucide-react'
 
 export default function PitDashboardWidget() {
@@ -29,16 +28,16 @@ export default function PitDashboardWidget() {
         {/* Action Buttons */}
         <div className="flex gap-2 pt-2">
           <Link href="/dashboard/pit/calculator" className="flex-1">
-            <Button className="w-full text-xs sm:text-sm bg-purple-600 hover:bg-purple-700 text-white">
-              <Calculator className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+            <button className="w-full text-xs sm:text-sm bg-purple-600 hover:bg-purple-700 text-white rounded px-3 py-2 font-medium flex items-center justify-center gap-1">
+              <Calculator className="w-3 h-3 sm:w-4 sm:h-4" />
               Kalkulator
-            </Button>
+            </button>
           </Link>
           <Link href="/dashboard/pit" className="flex-1">
-            <Button variant="outline" className="w-full text-xs sm:text-sm border-purple-500/30 hover:bg-purple-500/10 text-purple-300">
-              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+            <button className="w-full text-xs sm:text-sm border border-purple-500/30 hover:bg-purple-500/10 text-purple-300 rounded px-3 py-2 font-medium flex items-center justify-center gap-1">
+              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
               Rozliczenia
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
