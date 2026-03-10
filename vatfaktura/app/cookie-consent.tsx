@@ -8,20 +8,38 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookieConsent')
-    if (!consent) {
-      setIsVisible(true)
+    try {
+      if (typeof window !== 'undefined') {
+        const consent = localStorage.getItem('cookieConsent')
+        if (!consent) {
+          setIsVisible(true)
+        }
+      }
+    } catch (error) {
+      console.error('[v0] Cookie consent check failed:', error)
     }
   }, [])
 
   const handleAccept = () => {
-    localStorage.setItem('cookieConsent', 'accepted')
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cookieConsent', 'accepted')
+      }
+    } catch (error) {
+      console.error('[v0] Accept cookies failed:', error)
+    }
     setAccepted(true)
     setIsVisible(false)
   }
 
   const handleReject = () => {
-    localStorage.setItem('cookieConsent', 'rejected')
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cookieConsent', 'rejected')
+      }
+    } catch (error) {
+      console.error('[v0] Reject cookies failed:', error)
+    }
     setIsVisible(false)
   }
 
