@@ -271,7 +271,39 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SEO Keywords Section */}
+        {/* Coming Soon - PIT System */}
+        <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20">
+          <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border border-purple-500/50">
+            <div className="flex flex-col sm:flex-row items-center gap-8">
+              <div className="flex-1">
+                <div className="inline-block mb-4">
+                  <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    WKRÓTCE
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                  System Rozliczenia PIT
+                </h2>
+                <p className="text-purple-200/80 text-sm sm:text-base leading-relaxed mb-4">
+                  Pracujemy nad nowym systemem do automatycznego rozliczania podatku PIT. Będziesz mógł szybko i łatwo obliczyć podatek dochodowy, wygenerować PIT-37 i zarządzać swoimi podatkami - wszystko w jednym miejscu.
+                </p>
+                <p className="text-purple-200/70 text-xs sm:text-sm mb-6">
+                  Funkcjonalność będzie dostępna w Q2 2026. Bądź na bieżąco!
+                </p>
+                <Link href="/register">
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-white font-bold">
+                    Czekaj na aktualizację
+                  </Button>
+                </Link>
+              </div>
+              <div className="flex-shrink-0 hidden sm:block">
+                <div className="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg opacity-20"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Keywords Section */}
         <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32" id="keywords">
           <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-8 sm:p-12 md:p-16 border border-blue-500/20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 text-center">
