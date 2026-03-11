@@ -121,7 +121,6 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
       console.error('[v0] Failed to update invoice status:', error)
     }
   }
-  }
 
   const deleteInvoice = (id: string) => {
     try {
@@ -143,7 +142,7 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
       const duplicated: Invoice = {
         ...invoice,
         id: `inv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        number: `${invoice.number}-kopija`,
+        number: `${invoice.number}-kopia`,
         status: 'draft',
         statusHistory: [],
         issueDate: new Date().toISOString().split('T')[0],
@@ -172,34 +171,6 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error('[v0] Failed to save template:', error)
     }
-  }
-
-  const duplicateInvoice = (id: string): Invoice | null => {
-    const invoice = invoices.find(inv => inv.id === id)
-    if (!invoice) return null
-
-    const duplicated: Invoice = {
-      ...invoice,
-      id: `inv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      number: `${invoice.number}-kopія`,
-      status: 'draft',
-      statusHistory: [],
-      issueDate: new Date().toISOString().split('T')[0],
-      dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    }
-
-    addInvoice(duplicated)
-    return duplicated
-  }
-
-  const getInvoicesByUser = (userId: string) => {
-    return invoices.filter(inv => inv.userId === userId)
-  }
-
-  const saveTemplate = (template: any) => {
-    const updated = [...templates, template]
-    setTemplates(updated)
-    localStorage.setItem('vatfaktura_templates', JSON.stringify(updated))
   }
 
   return (

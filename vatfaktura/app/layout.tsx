@@ -1,17 +1,22 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist } from 'next/font/google'
+import './globals.css'
+import { InvoiceProvider } from './invoice-context'
+import { AuthProvider } from './auth-context'
 
-const geistSans = Geist({ subsets: ['latin'] })
+const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 
 export const metadata: Metadata = {
-  title: 'VAT Faktura',
-  description: 'Program do tworzenia faktur VAT',
+  title: 'VAT Faktura - Darmowy Program do Fakturowania z KSeF',
+  description: 'Darmowy program do wystawiania faktur VAT z pelna integracja KSeF. Bez limitow, bez oplat, bez karty kredytowej. Wystawiaj faktury w 30 sekund!',
+  keywords: 'faktury VAT, program do faktur, KSeF, darmowe fakturowanie, faktury online, e-faktury',
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
+  themeColor: '#0f172a',
 }
 
 export default function RootLayout({
@@ -20,30 +25,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pl">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>{`
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-          html, body, #__next {
-            width: 100%;
-            height: 100%;
-          }
-          body {
-            background-color: #0f172a;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            font-size: 16px;
-          }
-        `}</style>
-      </head>
-      <body>
-        {children}
+    <html lang="pl" className={geistSans.variable}>
+      <body className="font-sans antialiased">
+        <AuthProvider>
+          <InvoiceProvider>
+            {children}
+          </InvoiceProvider>
+        </AuthProvider>
       </body>
     </html>
   )
