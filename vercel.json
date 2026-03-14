@@ -1,4 +1,0 @@
-{
-  "buildCommand": "cd vatfaktura && next build",
-  "outputDirectory": "vatfaktura/.next"
-}
