@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { X, Cookie } from 'lucide-react'
 
-export default function CookieConsent() {
+export function CookieConsent() {
   const [accepted, setAccepted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
